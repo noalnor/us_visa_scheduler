@@ -61,6 +61,8 @@ WORK_LIMIT_TIME = config['TIME'].getfloat('WORK_LIMIT_TIME')
 WORK_COOLDOWN_TIME = config['TIME'].getfloat('WORK_COOLDOWN_TIME')
 # Temporary Banned (empty list): wait COOLDOWN_TIME hours
 BAN_COOLDOWN_TIME = config['TIME'].getfloat('BAN_COOLDOWN_TIME')
+# Heart bear gap (hour)
+HEART_BEAT_GAP = config['TIME'].getfloat('HEART_BEAT_GAP')
 
 # CHROMEDRIVER
 # Details for the script to control Chrome
@@ -237,12 +239,14 @@ else:
 
 if __name__ == "__main__":
     first_loop = True
-    
+    heart_beat_t0 = 0
+    heart_beat_working_time = 0
     while 1:
-        heart_beats_hour = datetime.now().hour
-        if heart_beats_hour == 0 or heart_beats_hour == 12:
-            send_notification("scheduler heart beat")
         LOG_FILE_NAME = "log_" + str(datetime.now().date()) + ".txt"
+        heart_beat_working_time = time.time() - heart_beat_t0
+        if heart_beat_working_time > (HEART_BEAT_GAP * hour)
+            send_notification("Heart beat")
+            heart_beat_t0 = time.time()
         if first_loop:
             t0 = time.time()
             total_time = 0
