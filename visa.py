@@ -191,8 +191,6 @@ def get_date():
 def get_time(date):
     time_url = TIME_URL % date
     session = driver.get_cookie("_yatri_session")["value"]
-    print("Get_time yatri_session cookie value")
-    print(session)
     script = JS_SCRIPT % (str(time_url), session)
     content = driver.execute_script(script)
     data = json.loads(content)
@@ -253,9 +251,6 @@ if __name__ == "__main__":
             print(msg)
             info_logger(LOG_FILE_NAME, msg)
             dates = get_date()
-            print("Printing the dates info: ")
-            print(dates)
-            print("End of the dates info.")
             if not dates:
                 # Ban Situation
                 msg = f"List is empty, Probabely banned!\n\tSleep for {BAN_COOLDOWN_TIME} hours!\n"
