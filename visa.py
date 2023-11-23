@@ -245,7 +245,7 @@ if __name__ == "__main__":
         LOG_FILE_NAME = "log_" + str(datetime.now().date()) + ".txt"
         heart_beat_working_time = time.time() - heart_beat_t0
         if heart_beat_working_time > (HEART_BEAT_GAP * hour):
-            send_notification("Heart beat")
+            send_notification("Heart beat", "♥")
             heart_beat_t0 = time.time()
         if first_loop:
             t0 = time.time()
