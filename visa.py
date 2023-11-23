@@ -237,7 +237,11 @@ else:
 
 if __name__ == "__main__":
     first_loop = True
+    
     while 1:
+        heart_beats_hour = datetime.now().hour
+        if heart_beats_hour == 0 or heart_beats_hour == 12:
+            send_notification("scheduler heart beat")
         LOG_FILE_NAME = "log_" + str(datetime.now().date()) + ".txt"
         if first_loop:
             t0 = time.time()
@@ -261,12 +265,11 @@ if __name__ == "__main__":
                 time.sleep(BAN_COOLDOWN_TIME * hour)
                 first_loop = True
             else:
-                # Print Available dates:
+                # Find out Available dates:
                 msg = ""
                 for d in dates:
                     msg = msg + "%s" % (d.get('date')) + ", "
                 msg = "Available dates:\n"+ msg
-                print(msg)
                 info_logger(LOG_FILE_NAME, msg)
                 date = get_available_date(dates)
                 if date:
